@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <!-- Webpage Title -->
+        <title>91한남 청약신청</title>
+
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="shortcut icon" href="/static/images/favicon.png">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+        <!-- 구글폰트 -->
+        <
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
+
+        <style type="text/css">
+            * {
+                font-family: 'Nanum Myeongjo', serif;
+            }
+
+            .wrap {
+                width: 500px;
+                margin: auto;
+            }
+
+            .img {
+                background-image: url('http://www.91hannam.kr/images/main/img_design01.jpg');
+                background-size: cover;
+                background-position: center;
+                width: 500px;
+                height: 300px;
+            }
+
+            .info {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .user-info {
+                margin: 20px 5px auto 5px;
+            }
+
+            h1, h5 {
+                display: inline;
+            }
+
+            .order {
+                text-align: center;
+            }
+
+            .orders {
+                margin-top: 100px;
+            }
+
+            .info-temp {
+                color: blue;
+            }
+        </style>
+
+        <script>
+            function order() {
+                alert("청약신청이 완료되었습니다.");
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="img"></div>
+            <div class="info">
+                <h1>91한남 분양신청</h1>
+                <h5>분양가:1억원/평</h5>
+                <p>2020년 7월 11일 현재, 우리나라에서 가장 비싼 아파트중 하나인 나인원한남(서울특별시 용산구 한남동위치) 지금 청약신청하세요. 고가 아파트답게 대부분의 입주민들이 재력가이며
+                    배우인 전지현, 배용준, 조우리와 가수인 지드래곤, 축구선수인 김영권 메가스터디 영어 1타강사 조정식(강사) 등이 거주 중입니다.
+                </p>
+            </div>
+            <div class="info">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">청약자</span>
+                    </div>
+                    <input type="text" class="form-control" id="order-name" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">평수</label>
+                    </div>
+                    <select class="custom-select" id="order-count">
+                        <option selected value=""> -- 평수를 선택하세요 --</option>
+                        <option value="1">75평</option>
+                        <option value="2">89평</option>
+                        <option value="3">펜트하우스</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">청약통장번호</span>
+                    </div>
+                    <input type="text" class="form-control" id="order-address" aria-describedby="basic-addon3">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">전화번호</span>
+                    </div>
+                    <input type="text" class="form-control" id="order-phone" aria-describedby="basic-addon3">
+                </div>
+                <div class="order">
+                    <button onclick="order()" type="button" class="btn btn-primary">신청하기</button>
+                </div>
+            </div>
+            <div class="orders">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">청약자</th>
+                        <th scope="col">평수</th>
+                        <th scope="col">청약통장번</th>
+                        <th scope="col">전화번호</th>
+                    </tr>
+                    </thead>
+                    <tbody id="orders-box">
+                    <tr>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+```

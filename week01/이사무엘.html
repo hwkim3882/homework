@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Webpage Title -->
+    <title>나홀로 쇼핑몰</title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/static/images/favicon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        * {
+            font-family: 'Stylish', sans-serif;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .img {
+            background-image: url('data:image/jpeg;base64,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');
+            background-size: cover;
+            background-position: center;
+            width: 500px;
+            height: 300px;
+        }
+
+        .info {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            margin: 20px 5px auto 5px;
+        }
+
+        h1, h5 {
+            display: inline;
+        }
+
+        .order {
+            text-align: center;
+        }
+
+        .orders {
+            margin-top: 100px;
+        }
+
+        .info-temp {
+            color: blue;
+        }
+        .selling {
+            color: red;
+        }
+    </style>
+
+    <script>
+        function order() {
+          alert('주문이 완료되었습니다. 5년만 기다려주세요');
+        }
+
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="img"></div>
+    <div class="info">
+        <h1>다이아를 싸게 팝니다</h1>
+        <h2>(급급급!!!!매!!!)</h2>
+        <h3>가격: $ 99,000 per </h3>
+        <p> 10년 뒤를 알고 싶으신 고객님! 미래 로또 번호를 미리 알고 싶은 고객님! 미래 어떤 사람이 되고 싶은지 알고 싶은 고객님!
+        지금 당장 BUY-NOW를 클릭 해 주세요.</p>
+        <p class="selling"> 카드 결재시 10% 부가세가 적용됩니다</p>
+    </div>
+    <div class="info">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Name</span>
+            </div>
+            <input type="text" class="form-control" id="order-name" aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="order-count">
+                <option selected value=""> -- 수량을 선택하세요(한개남음) --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">주소</span>
+            </div>
+            <input type="text" class="form-control" id="order-address" aria-describedby="basic-addon3">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">전화번호</span>
+            </div>
+            <input type="text" class="form-control" id="order-phone" aria-describedby="basic-addon3">
+        </div>
+        <div class="order">
+            <button onclick="order()" type="button" class="btn btn-primary">BUY-NOW</button>
+        </div>
+    </div>
+   <div class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+    </div>
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Username</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+        <label class="form-check-label" for="autoSizingCheck">
+          Remember me
+        </label>
+      </div>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-2">Submit</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
