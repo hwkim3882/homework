@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>Main page</title>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <!-- JQuery를 import 합니다 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Jua', sans-serif;
+            }
+
+            .wrap {
+                padding: 10px;
+                width: 1000px;
+                margin: auto;
+            }
+
+            .card-group {
+                padding: 10px;
+                width: 1000px;
+                margin: auto;
+            }
+        </style>
+        <script>
+
+            $(document).ready(function () {
+                showReview();
+            });
+
+
+            function showReview() {
+                // 1. 리뷰 목록을 서버에 요청하기
+                // 2. 요청 성공 여부 확인하기
+                // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
+                $.ajax({
+                    type: "GET",
+                    url: "/review",
+                    data: {},
+                    success: function (response) {
+                        let review = response['reviews'];
+                        console.log(review)
+                        let picture = review['picture'];
+                        let writer = review['writer'];
+                        let reviewtext = review['review'];
+                        let tempHtml = `
+            <div class="card">
+                <img src="..." class="card-img-top" alt="Placeholder image">
+                <div class="card-body">
+                    <h5 class="card-title">"${writer}"</h5>
+                    <p class="card-text">"${reviewtext}"</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>`
+                       $('#card-group').append(tempHtml);
+                    }
+                })
+
+            }
+        </script>
+    </head>
+    <body>
+        <div class="wrap">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="http://localhost:63342/my_project/main%20page.html?_ijt=8hj17hlbhkdu3n153a92l844pg">VIEW</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="http://localhost:63342/my_project/templates/upload_tap.html?_ijt=8hj17hlbhkdu3n153a92l844pg">UPLOAD</a>
+                </li>
+                <li class="nav-item2">
+                    <a class="nav-link"
+                       href="http://localhost:63342/my_project/dayday.html?_ijt=etqq0ebe4boqjt2rskb06cnnb">DAYDAY</a>
+                </li>
+            </ul>
+        </div>
+        <div id="card-group">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional
+                    content.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This card has even longer content than the first to show that equal height
+                    action.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+
+
+    </body>
+</html>
