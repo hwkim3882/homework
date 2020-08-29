@@ -63,8 +63,7 @@ def search() :
         except:
             print("\n\n\n\n", "-" * 70)
             print("undefined")
-    return
-
+    return ''
 
 
 @app.route('/review', methods=['GET'])
