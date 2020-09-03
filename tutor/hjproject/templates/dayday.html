@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="dayday">
+        <script>
+            $(document).ready(function () {
+                $("#weekly-box").html("");
+                showreport();
+            });
+
+            function showreport() {
+                // 1. 리뷰 목록을 서버에 요청하기
+                // 2. 요청 성공 여부 확인하기
+                // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
+                $.ajax({
+                    type: "GET",
+                    url: "review",
+                    data: {},
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            let reviews_dayday = response['reviews_dayday']
+
+                            //console.log(reviews_dayday)
+                            for (let i = 0; i < reviews_dayday.length; i++) {
+                                let rev_dayday= reviews_dayday[i];
+                                let reviews_dayday_writer = rev_dayday['writer'];
+                                console.log(reviews_dayday_writer)
+                                let mon = rev_dayday['Monday'];
+                                console.log(mon);
+                                let tue = rev_dayday['Tuesday'];
+                                let wed = rev_dayday['Wednesday'];
+                                let thu = rev_dayday['Thursday'];
+                                let fri = rev_dayday['Friday'];
+                                let sat = rev_dayday['Saturday'];
+                                let sun = rev_dayday['Sunday'];
+
+
+                                let tempHtml = `<tr>
+                                                <td>${reviews_dayday_writer}</td>
+                                                <td>${mon}</td>
+                                                <td>${tue}</td>
+                                                <td>${wed}</td>
+                                                <td>${thu}</td>
+                                                <td>${fri}</td>
+                                                <td>★</td>
+                                            </tr>`;
+                                $('#weekly-box').append(tempHtml);
+                            }
+                        } else {
+                            alert("리뷰를 받아오지 못했습니다");
+                        }
+                    }
+                })
+            }
+
+            // function report(, ,) {
+            //     let tempHtml = `<tr>
+            //                     <td>${}</td>
+            //                     <td>${}</td>
+            //                     <td>${}</td>
+            //                 </tr>`
+            //     $('#weekly-box').append(tempHtml);
+            // }
+
+        </script>
+
+
+        <div class="upload_tap">
+            <div class="page-header">
+                <h1>DAYDAY <small>Weekly report</small></h1>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">이름</th>
+                        <th scope="col">Monday</th>
+                        <th scope="col">Tuesday</th>
+                        <th scope="col">Thursday</th>
+                        <th scope="col">Saturday</th>
+                        <th scope="col">Friday</th>
+                        <th scope="col">미션성공</th>
+                    </tr>
+                    </thead>
+                    <tbody id="weekly-box">
+                    <tr>
+                        <td>김혜지</td>
+                        <td>O</td>
+                        <td>O</td>
+                        <td>O</td>
+                        <td>O</td>
+                        <td>O</td>
+                        <td>★</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main_page">
+        <style>
+            .card {
+                padding: 10px;
+                width: auto;
+                margin: auto;
+            }
+        </style>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#card-group").html("");
+                showReview();
+            });
+
+
+            function showReview() {
+                // 1. 리뷰 목록을 서버에 요청하기
+                // 2. 요청 성공 여부 확인하기
+                // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
+                $.ajax({
+                    type: "GET",
+                    url: "/review",
+                    data: {},
+                    success: function (response) {
+                        if (response["result"] == "success") {
+                            let reviews = response['reviews'];
+
+                            for (let i = 0; i < reviews.length; i++) {
+                                let review = reviews[i];
+                                makeView(review['writer'], review['review'], review['date'])
+                            }
+                        } else {
+                            alert("리뷰를 받아오지 못했습니다");
+                        }
+
+                        function makeView(writer, review, date) {
+                            let tempHtml = `
+            <div class="card">
+                <img src="..." class="card-img-top" alt="Placeholder image">
+                <div class="card-body">
+                    <h5 class="card-title">"${writer}"</h5>
+                    <p class="card-text">"${review}"</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">${date}</small>
+                </div>
+            </div>`
+                            $('#card-group').append(tempHtml);
+                        }
+                    }
+                })
+
+            }
+        </script>
+
+        <div id="card-group">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
