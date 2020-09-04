@@ -27,7 +27,7 @@ def dayday():
 @app.route('/review', methods=['POST'])
 def write_review():
     # title_receive로 클라이언트가 준 title 가져오기
-    #picture_receive = request.form['picture_give']
+    picture_receive = request.form['picture_give']
     # author_receive로 클라이언트가 준 author 가져오기
     writer_receive = request.form['writer_give']
     # review_receive로 클라이언트가 준 review 가져오기
@@ -39,7 +39,7 @@ def write_review():
     # print(date_receive)
     # DB에 삽입할 review 만들기
     review = {
-        #'picture': picture_receive,
+        'picture': picture_receive,
         'writer': writer_receive,
         'review': review_receive,
         'date': days[date_receive]

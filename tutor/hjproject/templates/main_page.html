@@ -30,16 +30,16 @@
 
                             for (let i = 0; i < reviews.length; i++) {
                                 let review = reviews[i];
-                                makeView(review['writer'], review['review'], review['date'])
+                                makeView(review['picture'],review['writer'], review['review'], review['date'])
                             }
                         } else {
                             alert("리뷰를 받아오지 못했습니다");
                         }
 
-                        function makeView(writer, review, date) {
+                        function makeView(picture, writer, review, date) {
                             let tempHtml = `
             <div class="card">
-                <img src="..." class="card-img-top" alt="Placeholder image">
+                <img src="${picture}" class="card-img-top" alt="Placeholder image">
                 <div class="card-body">
                     <h5 class="card-title">"${writer}"</h5>
                     <p class="card-text">"${review}"</p>

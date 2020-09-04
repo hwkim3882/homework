@@ -35,6 +35,14 @@
                 crossorigin="anonymous"></script>
 
         <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
+
+
+        <script>
+            UPLOADCARE_PUBLIC_KEY = 'e144de52bc655ed5ea38';
+        </script>
+
+        <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+
         <style type="text/css">
             * {
                 font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif';
@@ -53,7 +61,6 @@
                 margin: auto;
             }
         </style>
-
     </head>
 
     <body>
@@ -74,7 +81,6 @@
             </ul>
         </div>
         <div class="container">
-            <!--            <form action="/review" method="POST" enctype="multipart/form-data">-->
             {% block content %}
             {% endblock %}
         </div>
