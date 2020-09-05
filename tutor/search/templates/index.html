@@ -51,7 +51,7 @@
 
         function showSearchResult(title) {
 
-            //$('#search-box').empty()
+            $('#card-box').empty()
             console.log("start showSearchResult!!!")
 
             // 1. search 목록을 서버에 요청하기
@@ -65,7 +65,11 @@
                         let search_list = response["search_list"];
                         // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
                         for (let i = 0; i < search_list.length; i++) {
-                            console.log(search_list[i]);
+                            search_list_item = search_list[i];
+                            console.log(search_list_item)
+                            for(let j=0; j<10; j++){
+                                searchShow(search_list_item['title'][j], search_list_item['summary'][j]);
+                            }
                         }
                     } else {
                         alert("리뷰를 받아오지 못했습니다");
@@ -74,9 +78,20 @@
             })
         }
 
+        function searchShow(title, summary){
+            let temp_html = `<div class="card">
+                        <div class="card-body">
+                        <a href='#' target="_blank" class="card-title">${title}</a>
+                        <p class="card-text">${summary}</p>
+                        </div>
+                    </div>`;
+            $("#card-box").append(temp_html);
+        }
+
+
         let wordNumber = 0;
 
-        function makeCard() {
+        function makeBtn() {
             let title = $('#title').val();
             let tempHtml = `
            <a tabindex="0"
@@ -88,10 +103,6 @@
            title="Dismissible popover">${title}</a>`
 
             $("#search-box").append(tempHtml);
-
-
-
-
 
             $.ajax({
                 type: "POST",
@@ -119,10 +130,9 @@
             wordNumber += 1;
         }
 
-
     </script>
     <style>
-        .searc_box {
+        .search_box {
             max-width: 600px;
             width: 90%;
             margin: 20px auto 20px auto;
@@ -169,7 +179,7 @@
             </div>
 
             <span class="input-group-btn">
-                <button class="btn main-search__search-btn news-search-btn" type="button" onclick="makeCard()">
+                <button class="btn main-search__search-btn news-search-btn" type="button" onclick="makeBtn()">
                     <i class="fa fa-search"/> 검색
                 </button>
             </span>
@@ -184,6 +194,7 @@
         <div id="autocomplete-suggestions"></div>
         </div>
         <div id="search-box"></div>
+        <div id="card-box"></div>
 
     </body>
 </html>
