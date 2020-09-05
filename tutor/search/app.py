@@ -4,8 +4,10 @@ from bs4 import BeautifulSoup
 from gensim.summarization import summarize
 from newspaper import Article
 from urllib import parse
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 from pymongo import MongoClient  # pymongo를 임포트 하기(패키지 인스톨 먼저 해야겠죠?)
+
+import os
 
 app = Flask(__name__)
 
@@ -46,6 +48,9 @@ def search() :
 
     get_requests = requests.get(URL)
     links = BeautifulSoup(get_requests.text, 'html.parser').select('ul.type01 dt a')
+    title_s = []
+    summary_s = []
+    x = 0
 
     for link in links:
         try:
@@ -55,16 +60,17 @@ def search() :
             news.parse()
             # print("\n\n\n\n", "-" * 70)
             # print(f"{news.title} \n\n")
-            title = news.title
+            title_s.append(news.title)
             # print(f"{summarize(news.text, word_count=49)}")
-            summary = summarize(news.text, word_count=49)
-            print(title, summary)
+            summary_s.append(summarize(news.text, word_count=49))
+
+            print(title_s[x], summary_s[x])
+            x += 1
 
         except:
             print("\n\n\n\n", "-" * 70)
             print("undefined")
-    return ''
-
+    return jsonify({'result':'success', 'summary': summary_s, 'title': title_s})
 
 @app.route('/review', methods=['GET'])
 def read_reviews():
@@ -72,6 +78,26 @@ def read_reviews():
     reviews = list(db.reviews.find({}, {'_id': 0}))
     # 2. 성공 여부 & 리뷰 목록 반환하기
     return jsonify({'result': 'success', 'reviews': reviews})
+
+
+app.config["IMAGE_UPLOADS"] = "/mnt/c/wsl/projects/pythonise/tutorials/flask_series/app/app/static/img/uploads"
+
+@app.route("/upload-image", methods=["GET", "POST"])
+def upload_image():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            image = request.files["image"]
+
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+
+            print("Image saved")
+
+            return redirect(request.url)
+
+    return render_template("public/upload_image.html")
 
 
 if __name__ == '__main__':
