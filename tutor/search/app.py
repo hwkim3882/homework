@@ -48,7 +48,7 @@ def search() :
             # print(f"{summarize(news.text, word_count=49)}")
             summary_s.append(summarize(news.text, word_count=49))
 
-            print(title_s[x], summary_s[x])
+            # print(title_s[x], summary_s[x])
             x += 1
 
         except:
@@ -65,10 +65,15 @@ def search() :
 
     return jsonify({'result':'success', 'summary': summary_s, 'title': title_s})
 
-@app.route('/search_list', methods=['GET'])
+@app.route('/search_list', methods=['POST'])
 def search_list():
+
+    title_receive = request.form['title_give']
+    print(title_receive)
+
     # 1. DB에서 리뷰 정보 모두 가져오기
-    search_list = list(db.search_result.find({}, {'_id': 0}))
+    search_list = list(db.search_result.find({'search_word': title_receive }, {'_id': 0}))
+    print(search_list)
     # 2. 성공 여부 & 리뷰 목록 반환하기
     return jsonify({'result': 'success', 'search_list': search_list})
 

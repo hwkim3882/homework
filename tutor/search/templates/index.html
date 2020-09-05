@@ -46,18 +46,19 @@
 
         $(document).ready(function () {
             $("#search-box").html("");
-            showSearchResult();
+            //showSearchResult();
         });
 
-        function showSearchResult() {
+        function showSearchResult(title) {
 
-            $('#search-box').empty()
+            //$('#search-box').empty()
+            console.log("start showSearchResult!!!")
 
             // 1. search 목록을 서버에 요청하기
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/search_list",
-                data: {},
+                data: {'title_give':title},
                 success: function (response) {
                     // 2. 요청 성공 여부 확인하기
                     if (response["result"] == "success") {
@@ -89,10 +90,9 @@
             $("#search-box").append(tempHtml);
 
 
-            let tempScript = `<script  type="text/javascript">$(document).on("click", "#btn${wordNumber}" ,function(){alert("click");});`
-            $("#search-box").append(tempScript);
 
-            wordNumber += 1;
+
+
             $.ajax({
                 type: "POST",
                 url: "/search",
@@ -110,9 +110,13 @@
                 }
             })
 
+            let tempScript = `<script  type="text/javascript">$(document).on("click", "#btn${wordNumber}"
+,function(){
+    console.log("tempScript start")
+    showSearchResult("${title}")});`
+            $("#search-box").append(tempScript);
 
             wordNumber += 1;
-
         }
 
 
