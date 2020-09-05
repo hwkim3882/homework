@@ -24,22 +24,6 @@ def home():
 
     ## API 역할을 하는 부분
 
-
-@app.route('/review', methods=['POST'])
-def write_review():
-    # title_receive로 클라이언트가 준 title 가져오기
-    title_receive = request.form['title_give']
-
-    # DB에 삽입할 review 만들기
-    review = {
-        'title': title_receive,
-
-    }
-    # reviews에 review 저장하기
-    db.reviews.insert_one(review)
-    # 성공 여부 & 성공 메시지 반환
-    return jsonify({'result': 'success', 'msg': '검색완료.'})
-
 @app.route('/search', methods=['POST'])
 def search() :
     word = request.form['title_give']
@@ -70,35 +54,23 @@ def search() :
         except:
             print("\n\n\n\n", "-" * 70)
             print("undefined")
+
+    doc = {
+        'search_word': word,
+        'title' : title_s,
+        'summary': summary_s
+
+    }
+    db.search_result.insert_one(doc)
+
     return jsonify({'result':'success', 'summary': summary_s, 'title': title_s})
 
-@app.route('/review', methods=['GET'])
-def read_reviews():
+@app.route('/search_list', methods=['GET'])
+def search_list():
     # 1. DB에서 리뷰 정보 모두 가져오기
-    reviews = list(db.reviews.find({}, {'_id': 0}))
+    search_list = list(db.search_result.find({}, {'_id': 0}))
     # 2. 성공 여부 & 리뷰 목록 반환하기
-    return jsonify({'result': 'success', 'reviews': reviews})
-
-
-app.config["IMAGE_UPLOADS"] = "/mnt/c/wsl/projects/pythonise/tutorials/flask_series/app/app/static/img/uploads"
-
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
-
-    if request.method == "POST":
-
-        if request.files:
-
-            image = request.files["image"]
-
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-
-            print("Image saved")
-
-            return redirect(request.url)
-
-    return render_template("public/upload_image.html")
-
+    return jsonify({'result': 'success', 'search_list': search_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

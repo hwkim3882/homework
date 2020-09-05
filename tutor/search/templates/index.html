@@ -45,45 +45,26 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $("#reviews-box").html("");
-            showReview();
+            $("#search-box").html("");
+            showSearchResult();
         });
 
-        function makeReview() {
-            // 1. 제목, 저자, 리뷰 내용을 가져옵니다.
-            let title = $("#title").val();
+        function showSearchResult() {
 
+            $('#search-box').empty()
 
-            // 3. POST /review 에 저장을 요청합니다.
-            $.ajax({
-                type: "POST",
-                url: "/review",
-                data: {title_give: title},
-                success: function (response) {
-                    if (response["result"] == "success") {
-                        alert(response["msg"]);
-                        window.location.reload();
-                    }
-                }
-            })
-        }
-
-        function showReview() {
-
-            $('#reviews-box').empty()
-
-            // 1. 리뷰 목록을 서버에 요청하기
+            // 1. search 목록을 서버에 요청하기
             $.ajax({
                 type: "GET",
-                url: "/review",
+                url: "/search_list",
                 data: {},
                 success: function (response) {
                     // 2. 요청 성공 여부 확인하기
                     if (response["result"] == "success") {
-                        let reviews = response["reviews"];
+                        let search_list = response["search_list"];
                         // 3. 요청 성공했을 때 리뷰를 올바르게 화면에 나타내기
-                        for (let i = 0; i < reviews.length; i++) {
-                            makeCard(reviews[i]["title"]);
+                        for (let i = 0; i < search_list.length; i++) {
+                            console.log(search_list[i]);
                         }
                     } else {
                         alert("리뷰를 받아오지 못했습니다");
@@ -92,17 +73,30 @@
             })
         }
 
+        let wordNumber = 0;
 
         function makeCard() {
-            let title = $("#title").val();
+            let title = $('#title').val();
             let tempHtml = `
-           <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="A?ads;flkadspi??">${title}</a>
-         </span>`;
+           <a tabindex="0"
+           id= "btn`+`${wordNumber}\"
+           class="btn btn-lg btn-danger"
+           role="button"
+           data-toggle="popover"
+           data-trigger="focus"
+           title="Dismissible popover">${title}</a>`
 
+            $("#search-box").append(tempHtml);
+
+
+            let tempScript = `<script  type="text/javascript">$(document).on("click", "#btn${wordNumber}" ,function(){alert("click");});`
+            $("#search-box").append(tempScript);
+
+            wordNumber += 1;
             $.ajax({
                 type: "POST",
                 url: "/search",
-                data: {title_give:title},
+                data: {title_give: title},
                 success: function (response) {
                     // 2. 요청 성공 여부 확인하기
                     if (response["result"] == "success") {
@@ -116,7 +110,8 @@
                 }
             })
 
-            $("#reviews-box").append(tempHtml);
+
+            wordNumber += 1;
 
         }
 
@@ -152,7 +147,7 @@
 
     </style>
     <body>
-        <div class="searc_box">
+        <div class="search_box">
             <div class="lycos">
                 <a href="#"><img
                         src="https://search.naver.com/search.naver?&where=news&query="
@@ -184,7 +179,7 @@
         </div>
         <div id="autocomplete-suggestions"></div>
         </div>
-        <div id="reviews-box"></div>
+        <div id="search-box"></div>
 
     </body>
 </html>
